@@ -37,5 +37,13 @@ let pokemonList = [
     }
 ];
 
-alert(pokemonList[3].name);
-document.write(pokemonList[3].name);
+alert(`There are ${pokemonList.length} pokémon going to be printed.`);
+
+for (i = 0; i < pokemonList.length; i++) {
+    document.write('<p>');
+    document.write(`${pokemonList[i].name} (Height: ${pokemonList[i].height}\'\')`);
+    if (pokemonList[i].height >= 5) {
+        document.write(' ... that\'s big!');
+    }
+    document.write('</p>');
+}
