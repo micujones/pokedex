@@ -23,6 +23,7 @@ a:hover {
     border-style: solid;
     border-width: 2px;
     border-color: black;
+    box-shadow: 4px;
 }
 
 #inputWrapper:hover {
@@ -47,6 +48,33 @@ a:hover {
     height: 24px;
 }
 
+ul,
+li {
+    display: flex;
+}
+
+ul {
+    flex-direction: column;
+    gap: 8px;
+    
+    list-style: none;
+    padding: 0;
+}
+
+.pokemonListItem {
+    height: 50px;
+    margin: 0 auto;
+    background-color: gainsboro;
+    font-family: inherit;
+    border-radius: 8px;
+    border: none;
+    transition: scale 150ms;
+}
+
+.pokemonListItem:hover {
+    scale: 1.03;
+}
+
 @media screen and (max-width: 500px) {
     #inputWrapper {
         width: 90vw;
@@ -56,10 +84,17 @@ a:hover {
         width: 80vw;
         border-radius: 24px;
     } */
+    .pokemonListItem {
+        width: 90vw;
+        height: 50px;
+    }
 }
 
 @media screen and (min-width: 500px) {
     #inputWrapper {
+        min-width: 50vw;
+    }
+    .pokemonListItem {
         min-width: 50vw;
     }
 }
