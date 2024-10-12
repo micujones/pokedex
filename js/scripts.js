@@ -12,6 +12,25 @@ let pokemonRepository = (function() {
         }
     }
 
+    function showLoadingMessage() {
+        let pokemonList = document.querySelector('.pokemon-list');
+
+        let loadingContainer = document.createElement('div');
+        loadingContainer.classList.add('loading');
+
+        let loadingMessage = document.createElement('p');
+        loadingMessage.innerText = 'Loading that pokémon';
+
+        loadingContainer.appendChild(loadingMessage);
+        pokemonList.appendChild(loadingContainer);
+    }
+
+    function hideLoadingMessage() {
+        let pokemonList = document.querySelector('.pokemon-list');
+        let loadingContainer = document.querySelector('.loading');
+        pokemonList.removeChild(loadingContainer);
+    }
+
     // Add pokemon to ul
     function addListItem(pokemon) {
         let pokemonList = document.querySelector('ul');
@@ -34,9 +53,12 @@ let pokemonRepository = (function() {
     }
 
     function loadList () {
+        showLoadingMessage();
+
         return fetch(apiUrl).then(function(response) {
             return response.json();
         }).then(function(json) {
+            hideLoadingMessage();
             json.results.forEach(function(item) {
                 let pokemon = {
                     name: item.name,
@@ -45,15 +67,19 @@ let pokemonRepository = (function() {
                 add(pokemon);
             })
         }).catch(function(e) {
+            hideLoadingMessage();
             console.error(e);
         })
     }
 
     function loadDetails (pokemon) {
+        showLoadingMessage();
+
         let url = pokemon.detailsUrl;
         return fetch(url).then(function(response) {
             return response.json();
         }).then(function(details) {
+            hideLoadingMessage();
             pokemon.imageUrl = details.sprites.front_default;
             pokemon.height = details.height;
             pokemon.types = [];
@@ -62,6 +88,7 @@ let pokemonRepository = (function() {
                 pokemon.types.push(item.type.name);
             });
         }).catch(function(e) {
+            hideLoadingMessage();
             return console.error(e);
         })
     }

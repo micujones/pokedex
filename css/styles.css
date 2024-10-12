@@ -98,3 +98,19 @@ ul {
         min-width: 50vw;
     }
 }
+
+.loading {
+    background-color: red;
+    height: fit-content;
+    width: 150px;
+    border-radius: 8px;
+    border-style: none;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: whitesmoke;
+    text-align: center;
+}
