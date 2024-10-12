@@ -56,7 +56,11 @@ let pokemonRepository = (function() {
         }).then(function(details) {
             pokemon.imageUrl = details.sprites.front_default;
             pokemon.height = details.height;
-            pokemon.types = details.types;
+            pokemon.types = [];
+            
+            details.types.forEach(function(item) {
+                pokemon.types.push(item.type.name);
+            });
         }).catch(function(e) {
             return console.error(e);
         })
