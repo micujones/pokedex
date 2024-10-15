@@ -1,6 +1,6 @@
 let pokemonRepository = (function() {
     let pokemonList = [];
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=15';
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
 
     function getAll() {
         return pokemonList;
@@ -12,9 +12,7 @@ let pokemonRepository = (function() {
         }
     }
 
-    function showLoadingMessage() {
-        let pokemonList = document.querySelector('.pokemon-list');
-
+    function createLoadingMessage() {
         let loadingContainer = document.createElement('div');
         loadingContainer.classList.add('loading');
 
@@ -22,7 +20,15 @@ let pokemonRepository = (function() {
         loadingMessage.innerText = 'Loading that pokémon';
 
         loadingContainer.appendChild(loadingMessage);
-        pokemonList.appendChild(loadingContainer);
+
+        return loadingContainer;
+    }
+
+    function showLoadingMessage() {
+        let pokemonList = document.querySelector('.pokemon-list');
+        let loadingMessage = createLoadingMessage();
+        
+        pokemonList.appendChild(loadingMessage);
     }
 
     function hideLoadingMessage() {
@@ -72,21 +78,34 @@ let pokemonRepository = (function() {
         })
     }
 
+    function createNewPokemon (pokemon) {
+        return pokemonData = {
+            name: pokemon.name,
+            imageUrl: null,
+            height: null,
+            types: null
+        };
+    }
+
     function loadDetails (pokemon) {
         showLoadingMessage();
 
-        let url = pokemon.detailsUrl;
-        return fetch(url).then(function(response) {
+        let pokemonData = createNewPokemon(pokemon);
+
+        return fetch(pokemon.detailsUrl).then(function(response) {
             return response.json();
         }).then(function(details) {
             hideLoadingMessage();
-            pokemon.imageUrl = details.sprites.front_default;
-            pokemon.height = details.height;
-            pokemon.types = [];
+
+            pokemonData.imageUrl = details.sprites.front_default;
+            pokemonData.height = details.height;
+            pokemonData.types = [];
             
             details.types.forEach(function(item) {
-                pokemon.types.push(item.type.name);
+                pokemonData.types.push(item.type.name);
             });
+
+            return pokemonData;
         }).catch(function(e) {
             hideLoadingMessage();
             return console.error(e);
@@ -94,7 +113,7 @@ let pokemonRepository = (function() {
     }
 
     function showDetails(pokemon) {
-        loadDetails(pokemon).then(function() {
+        loadDetails(pokemon).then(function(pokemon) {
             console.log(pokemon);
         });
     }
