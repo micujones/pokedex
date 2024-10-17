@@ -135,12 +135,25 @@ ul {
 .modal {
     display: flex;
     flex-direction: column;
+    text-align: center;
     position: relative;
     margin: auto;
     gap: 18px;
     padding: 18px;
     border-radius: 8px;
     background-color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+    .modal {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .modal {
+        width: 35%;
+    }
 }
 
 .hide-modal {
@@ -160,6 +173,7 @@ ul {
 }
 .stats, .types {
     display: flex;
+    justify-content: center;
 }
 
 .stats {

@@ -80,9 +80,11 @@ let pokemonRepository = (function() {
 
     function createNewPokemon (pokemon) {
         return pokemonData = {
+            detailsUrl: pokemon.detailsUrl,
             name: pokemon.name,
             imageUrl: null,
             height: null,
+            weight: null,
             types: null
         };
     }
@@ -99,10 +101,11 @@ let pokemonRepository = (function() {
 
             pokemonData.imageUrl = details.sprites.front_default;
             pokemonData.height = details.height;
+            pokemonData.weight = details.weight;
             pokemonData.types = [];
             
             details.types.forEach(function(item) {
-                pokemonData.types.push(item.type.name);
+                pokemonData.types.push(item.type);
             });
 
             return pokemonData;
@@ -112,9 +115,11 @@ let pokemonRepository = (function() {
         })
     }
 
+    // Show pokemon's name, types, height, and sprite
     function showDetails(pokemon) {
+
         loadDetails(pokemon).then(function(pokemon) {
-            console.log(pokemon);
+            modalFunctions.showModal(pokemon);
         });
     }
 
@@ -125,6 +130,86 @@ let pokemonRepository = (function() {
         loadList: loadList,
         loadDetails: loadDetails,
         showDetails: showDetails
+    };
+})();
+
+
+// A MODAL NEEDS TO...
+// display when a button is clicked (showModal)
+// be centered on the screen (createModal)
+// have title and text (createModal, showModal)
+// close when 'ESC', 'close' button, or outside the modal is pressed
+// work on mobile devices
+
+let modalFunctions = (function() {
+
+    function createModal(pokemon) {
+        let modalContainer = document.querySelector('#modal-container');
+        
+        let modal = document.createElement('div')
+        modal.classList.add('modal');
+
+        let hideButton = document.createElement('button');
+        hideButton.classList.add('hide-modal');
+        hideButton.innerText = 'x';
+
+        let sprite = document.createElement('img');
+        sprite.src = pokemon.imageUrl;
+        sprite.alt = 'Sprite of ' + pokemon.name;
+
+        let title = document.createElement('h1');
+        title.innerText = pokemon.name;
+
+        // Stats container
+        let statsContainer = document.createElement('div');
+        statsContainer.classList.add('stats');
+        
+        let height = document.createElement('p');
+        height.innerText = pokemon.height + ' cm';
+        let weight = document.createElement('p');
+        weight.innerText = pokemon.weight + ' kg';
+
+        statsContainer.appendChild(height);
+        statsContainer.appendChild(weight);
+
+        // Types container
+        let typesContainer = document.createElement('div');
+        typesContainer.classList.add('types');
+        pokemon.types.forEach(function(item) {            
+            let typeSprite = document.createElement('img');
+            typeSprite.src = getTypeSprite(item.url);
+            typesContainer.appendChild(typeSprite);
+        });
+
+        // Add modal elements and modal to modal container
+        modal.appendChild(hideButton);
+        modal.appendChild(sprite);
+        modal.appendChild(title);
+        modal.appendChild(statsContainer);
+        modal.appendChild(typesContainer);
+        modalContainer.appendChild(modal);
+    }
+
+    function getTypeSprite(url) {        
+        fetch(url).then(function(response) {
+            return response.json();
+        }).then(function(details) {
+            return details.sprites['generation-iii'].colosseum.name_icon;
+        });
+    }
+
+
+    function showModal(pokemon) {
+        createModal(pokemon)
+
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.add('is-visible');
+    }
+
+    // hideModal
+
+    return {
+        showModal: showModal,
     };
 })();
 
