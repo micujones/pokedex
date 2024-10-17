@@ -8,7 +8,8 @@ body {
     font-family: 'Play';
 }
 
-a:hover {
+a:hover,
+button:hover {
     cursor: pointer;    
 }
 

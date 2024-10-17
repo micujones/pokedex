@@ -133,18 +133,14 @@ let pokemonRepository = (function() {
     };
 })();
 
-
-// A MODAL NEEDS TO...
-// display when a button is clicked (showModal)
-// be centered on the screen (createModal)
-// have title and text (createModal, showModal)
-// close when 'ESC', 'close' button, or outside the modal is pressed
-// work on mobile devices
-
 let modalFunctions = (function() {
 
     function createModal(pokemon) {
         let modalContainer = document.querySelector('#modal-container');
+        modalContainer.addEventListener('click', (e) => {
+            let target = e.target;
+            if (target === modalContainer) { hideModal(); }
+        });
         
         let modal = document.createElement('div')
         modal.classList.add('modal');
@@ -152,6 +148,9 @@ let modalFunctions = (function() {
         let hideButton = document.createElement('button');
         hideButton.classList.add('hide-modal');
         hideButton.innerText = 'x';
+        hideButton.addEventListener('click', () => {
+            hideModal();
+        })
 
         let sprite = document.createElement('img');
         sprite.src = pokemon.imageUrl;
@@ -206,7 +205,20 @@ let modalFunctions = (function() {
         modalContainer.classList.add('is-visible');
     }
 
-    // hideModal
+    function hideModal() {
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+
+        let modal = document.querySelector('.modal');
+        modalContainer.removeChild(modal);
+    }
+
+    window.addEventListener('keydown', (e) => {
+        let modalContainer = document.querySelector('#modal-container');
+        if(e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+            hideModal();
+        }
+    });
 
     return {
         showModal: showModal,
