@@ -135,7 +135,7 @@ let pokemonRepository = (function() {
 
 let modalFunctions = (function() {
 
-    function createModal(pokemon) {
+    async function createModal(pokemon) {
         let modalContainer = document.querySelector('#modal-container');
         modalContainer.addEventListener('click', (e) => {
             let target = e.target;
@@ -174,11 +174,11 @@ let modalFunctions = (function() {
         // Types container
         let typesContainer = document.createElement('div');
         typesContainer.classList.add('types');
-        pokemon.types.forEach(function(item) {            
+        for (i = 0; i < pokemon.types.length; i++) {
             let typeSprite = document.createElement('img');
-            typeSprite.src = getTypeSprite(item.url);
+            typeSprite.src = await getTypeSprite(pokemon.types[i].url)
             typesContainer.appendChild(typeSprite);
-        });
+        }
 
         // Add modal elements and modal to modal container
         modal.appendChild(hideButton);
@@ -189,14 +189,11 @@ let modalFunctions = (function() {
         modalContainer.appendChild(modal);
     }
 
-    function getTypeSprite(url) {        
-        fetch(url).then(function(response) {
-            return response.json();
-        }).then(function(details) {
-            return details.sprites['generation-iii'].colosseum.name_icon;
-        });
+    async function getTypeSprite(url) { 
+        let response = await fetch(url);
+        let typeInfo = await response.json();
+        return typeInfo.sprites['generation-viii']['sword-shield'].name_icon;
     }
-
 
     function showModal(pokemon) {
         createModal(pokemon)
