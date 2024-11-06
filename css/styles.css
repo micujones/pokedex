@@ -8,12 +8,12 @@ body {
     font-family: 'Play';
 }
 
-a:hover,
+/* a:hover,
 button:hover {
     cursor: pointer;    
-}
+} */
 
-#inputWrapper {
+/* #inputWrapper {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -47,9 +47,9 @@ button:hover {
 
 .search-icon {
     height: 24px;
-}
+} */
 
-ul,
+/* ul,
 li {
     display: flex;
 }
@@ -84,7 +84,7 @@ ul {
     /* .main-search {
         width: 80vw;
         border-radius: 24px;
-    } */
+    } */ /*
     .pokemonListItem {
         width: 90vw;
         height: 50px;
@@ -98,7 +98,7 @@ ul {
     .pokemonListItem {
         min-width: 50vw;
     }
-}
+} */
 
 .loading {
     background-color: red;
@@ -116,7 +116,7 @@ ul {
     text-align: center;
 }
 
-#modal-container {
+/* #modal-container {
     display: none;
 }
 
@@ -167,9 +167,9 @@ ul {
     font-size: 18px;
     background-color: transparent;
     color: #bbb;
-}
+} */
 
-.stats > p, .types, .modal > h1 {
+.stats > p, .types {
     margin: 0;
 }
 .stats, .types {

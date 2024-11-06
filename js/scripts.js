@@ -41,10 +41,13 @@ let pokemonRepository = (function() {
     function addListItem(pokemon) {
         let pokemonList = document.querySelector('ul');
 
+        // w/ Bootstrap classes
         let listItem = document.createElement('li');
-        let button = document.createElement('button');
+        let button = document.createElement('button'); 
         button.innerText = pokemon.name;
-        button.classList.add('pokemonListItem')
+        listItem.classList.add('list-group-item');
+        button.classList.add('btn', 'btn-light');
+
         listItem.appendChild(button);
         pokemonList.appendChild(listItem);
 
@@ -115,11 +118,58 @@ let pokemonRepository = (function() {
         })
     }
 
-    // Show pokemon's name, types, height, and sprite
+    async function showModal(pokemon) {
+        let modalTitle = $('.modal-title');
+        let modalBody = $('.modal-body');
+
+        modalTitle.empty();
+        modalBody.empty();
+
+        modalTitle.text(pokemon.name);
+        modalBody.css('text-align', 'center');
+
+        // Create pokemon sprite
+        let sprite = document.createElement('img');
+        sprite.src = pokemon.imageUrl;
+        sprite.alt = 'Sprite of ' + pokemon.name;
+
+        // Create stats
+        let statsContainer = document.createElement('div');
+        statsContainer.classList.add('stats');
+
+        let height = document.createElement('p');
+        height.innerText = pokemon.height + ' cm';
+        let weight = document.createElement('p');
+        weight.innerText = pokemon.weight + ' kg';
+
+        // Create types
+        let typesContainer = document.createElement('div');
+        typesContainer.classList.add('types');
+        for (i = 0; i < pokemon.types.length; i++) {
+            let typeSprite = document.createElement('img');
+            typeSprite.src = await getTypeSprite(pokemon.types[i].url)
+            typesContainer.appendChild(typeSprite);
+        }
+
+        modalBody.append(sprite);
+        modalBody.append(statsContainer);
+        modalBody.append(typesContainer);
+
+        $('#pokemon-modal').modal('show');
+    }
+
+    async function getTypeSprite(url) { 
+        let response = await fetch(url);
+        let typeInfo = await response.json();
+        return typeInfo.sprites['generation-viii']['sword-shield'].name_icon;
+    }
+
+    // Show pokemon's name, types, height, weight, and sprite
     function showDetails(pokemon) {
 
         loadDetails(pokemon).then(function(pokemon) {
-            modalFunctions.showModal(pokemon);
+            showModal(pokemon);
+            // modalFunctions.showModal(pokemon);
         });
     }
 
@@ -207,7 +257,7 @@ let modalFunctions = (function() {
         modalContainer.classList.remove('is-visible');
 
         let modal = document.querySelector('.modal');
-        modalContainer.removeChild(modal);
+        if (modalContainer.contains(modal)) { modalContainer.removeChild(modal); }
     }
 
     window.addEventListener('keydown', (e) => {
