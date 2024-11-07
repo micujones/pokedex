@@ -23,34 +23,60 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
     <!-- END MODAL -->
-    <!-- ADD BOOSTRAP NAV BAR -->
-    <header></header>
-    <h1>Pokédex</h1>
-    <!-- <div id="inputWrapper">
-      <input
-        type="search"
-        class="form-control form-control-lg form-control-borderless"
-        placeholder="Name that pokémon"
-      />
-      <div class="icon-container">
-        <img src="img/magnifying-glass-icon.svg" alt="" class="search-icon" />
-      </div>
-    </div>
-    <div> -->
-      <h2>Mike's favorite pokémon</h2>
+    <nav class="navbar sticky-top navbar-dark my-lg-0 bg-dark">
+      <a class="navbar-brand" href="#">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/770px-Pok%C3%A9_Ball_icon.svg.png"
+          width="30"
+          height="30"
+          alt="Pokeball logo"
+        />
+        Pokédex
+      </a>
+      <form class="form-inline">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Find that pokémon"
+          aria-label="Search"
+        />
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+    </nav>
+    <div>
       <ul class="pokemon-list list-group"></ul>
+    </div>
+    <div class="return-to-top">
+      <a href="#"
+        ><img
+          src="https://static.thenounproject.com/png/1854006-200.png"
+          alt="Up arrow to return to the top of page"
+      /></a>
     </div>
     <footer></footer>
     <script

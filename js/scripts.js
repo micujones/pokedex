@@ -138,9 +138,13 @@ let pokemonRepository = (function() {
         statsContainer.classList.add('stats');
 
         let height = document.createElement('p');
-        height.innerText = pokemon.height + ' cm';
+        let heightVal = pokemon.height * 10;
+        height.innerText = heightVal + ' cm';
         let weight = document.createElement('p');
         weight.innerText = pokemon.weight + ' kg';
+
+        statsContainer.appendChild(height);
+        statsContainer.appendChild(weight);
 
         // Create types
         let typesContainer = document.createElement('div');
@@ -180,95 +184,6 @@ let pokemonRepository = (function() {
         loadList: loadList,
         loadDetails: loadDetails,
         showDetails: showDetails
-    };
-})();
-
-let modalFunctions = (function() {
-
-    async function createModal(pokemon) {
-        let modalContainer = document.querySelector('#modal-container');
-        modalContainer.addEventListener('click', (e) => {
-            let target = e.target;
-            if (target === modalContainer) { hideModal(); }
-        });
-        
-        let modal = document.createElement('div')
-        modal.classList.add('modal');
-
-        let hideButton = document.createElement('button');
-        hideButton.classList.add('hide-modal');
-        hideButton.innerText = 'x';
-        hideButton.addEventListener('click', () => {
-            hideModal();
-        })
-
-        let sprite = document.createElement('img');
-        sprite.src = pokemon.imageUrl;
-        sprite.alt = 'Sprite of ' + pokemon.name;
-
-        let title = document.createElement('h1');
-        title.innerText = pokemon.name;
-
-        // Stats container
-        let statsContainer = document.createElement('div');
-        statsContainer.classList.add('stats');
-        
-        let height = document.createElement('p');
-        height.innerText = pokemon.height + ' cm';
-        let weight = document.createElement('p');
-        weight.innerText = pokemon.weight + ' kg';
-
-        statsContainer.appendChild(height);
-        statsContainer.appendChild(weight);
-
-        // Types container
-        let typesContainer = document.createElement('div');
-        typesContainer.classList.add('types');
-        for (i = 0; i < pokemon.types.length; i++) {
-            let typeSprite = document.createElement('img');
-            typeSprite.src = await getTypeSprite(pokemon.types[i].url)
-            typesContainer.appendChild(typeSprite);
-        }
-
-        // Add modal elements and modal to modal container
-        modal.appendChild(hideButton);
-        modal.appendChild(sprite);
-        modal.appendChild(title);
-        modal.appendChild(statsContainer);
-        modal.appendChild(typesContainer);
-        modalContainer.appendChild(modal);
-    }
-
-    async function getTypeSprite(url) { 
-        let response = await fetch(url);
-        let typeInfo = await response.json();
-        return typeInfo.sprites['generation-viii']['sword-shield'].name_icon;
-    }
-
-    function showModal(pokemon) {
-        createModal(pokemon)
-
-        let modalContainer = document.querySelector('#modal-container');
-        modalContainer.classList.add('is-visible');
-    }
-
-    function hideModal() {
-        let modalContainer = document.querySelector('#modal-container');
-        modalContainer.classList.remove('is-visible');
-
-        let modal = document.querySelector('.modal');
-        if (modalContainer.contains(modal)) { modalContainer.removeChild(modal); }
-    }
-
-    window.addEventListener('keydown', (e) => {
-        let modalContainer = document.querySelector('#modal-container');
-        if(e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-            hideModal();
-        }
-    });
-
-    return {
-        showModal: showModal,
     };
 })();
 
