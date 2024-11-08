@@ -26,10 +26,26 @@ a, a:hover {
     width: auto;
 }
 
+@media screen and (min-width: 575px) {
+    .pokemon-list, .intro-text  {
+        width: 450px;
+    }
+}
+
+.pokemon-list, .intro-text {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-text {
+    padding: 15px 0;
+}
+
 .loading {
     background-color: red;
     height: fit-content;
     width: 150px;
+    padding-top: 10px;
     border-radius: 8px;
     border-style: none;
 
