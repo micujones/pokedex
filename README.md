@@ -6,6 +6,8 @@ The objective is create an online encyclopedia of Pokémon, also known as a pok�
 
 ## Getting the Pokédex runnning
 
-## Project dependencies
+Simply click a name from the list of 1st Gen Pokémon and see the details of that pokémon, including its height, weight, and types.
 
 ## APIs
+
+This application uses the following API that provdes an exhaustive collection of Pokémon details: https://pokeapi.co/api/v2/pokemon/?limit=151
