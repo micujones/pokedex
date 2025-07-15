@@ -13,7 +13,7 @@ The objective is create an online encyclopedia of Pokémon, also known as a pok�
 
 -   [PokéAPI](https://pokeapi.co/api/v2/pokemon/?limit=151)
 -   [jQuery](https://jquery.com/)
--   ![Bootstrap](https://getbootstrap.com)
+-   [Bootstrap](https://getbootstrap.com)
 
 ## Installation
 
