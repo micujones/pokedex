@@ -8,8 +8,23 @@ body {
     font-family: 'Play';
 }
 
-a, a:hover {
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    height: 100%;
+}
+
+a,
+a:hover {
     color: inherit;
+}
+
+/* Add'l styling to Bootstrap */
+.btn-light,
+.btn-light:hover {
+    background-color: transparent;
+    border: none;
 }
 
 .return-to-top {
@@ -26,19 +41,30 @@ a, a:hover {
     width: auto;
 }
 
+.pokemon-search,
+.intro-text,
+.pokemon-list {
+    margin: 0 auto;
+}
+
+.pokemon-search,
+.intro-text {
+    text-align: left;
+    padding: 15px 0;
+}
+
+.pokemon-list {
+    text-align: center;
+    height: 500px;
+    overflow: scroll;
+}
+
 @media screen and (min-width: 575px) {
-    .pokemon-list, .intro-text  {
+    .pokemon-list,
+    .intro-text,
+    .pokemon-search {
         width: 450px;
     }
-}
-
-.pokemon-list, .intro-text {
-    margin: 0 auto;
-    text-align: center;
-}
-
-.intro-text {
-    padding: 15px 0;
 }
 
 .loading {
@@ -62,10 +88,12 @@ a, a:hover {
     width: 75%;
 }
 
-.stats > p, .types {
+.stats > p,
+.types {
     margin: 0;
 }
-.stats, .types {
+.stats,
+.types {
     display: flex;
     justify-content: center;
 }
