@@ -13,9 +13,23 @@ The objective is create an online encyclopedia of Pokémon, also known as a pok�
 
 -   [PokéAPI](https://pokeapi.co/api/v2/pokemon/?limit=151)
 -   [jQuery](https://jquery.com/)
--   ![Bootstrap](https://getbootstrap.com)
+-   [Bootstrap](https://getbootstrap.com)
 
 ## Installation
 
 1.  `gh repo clone micujones/pokedex`
 2.  `cd pokedex`
+
+## Usage
+
+Home screen:
+
+<img src="image/screenshot_home.png" alt="Pokédex home screen">
+
+Searching for Pokémon:
+
+<img src="image/screenshot_search.png" alt="Pokédex search option" width="300px">
+
+Pokémon details card:
+
+<img src="image/screenshot_card.png" alt="Pokédex search option" width="300px">
